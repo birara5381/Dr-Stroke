@@ -1,5 +1,5 @@
 Flask
 numpy
-tensorflow=
+tensorflow
 Pillow
 gunicorn==20.1.0
