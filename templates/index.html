@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stroke Identification</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Style for overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            padding-top: 20%;
+            z-index: 1000;
+        }
+    </style>
+
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">DR.Stroke</a></li>                
+                <li><a href="https://www.stroke.org/en/">About Stroke</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+        <form action="/predict" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <input type="file" name="file" accept="image/*">
+            <input type="submit" value="Predict">
+        </form>
+        <div class="overlay" id="overlay">
+            No file selected!
+        </div>
+        {% if prediction %}
+            <h2>Prediction: {{ prediction }}</h2>
+            <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image">
+        {% elif filename %}
+            <p>No prediction available.</p>
+            <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image">
+        {% endif %}
+    </main>
+    
+    <footer style= "position: fixed; bottom: 0; left: 0; z-index: 1000;" >        
+        <p>  BDU&copy; 2024 </p>
+    </footer>
+   
+    
+    <script>
+        function validateForm() {
+            var fileInput = document.querySelector('input[type=file]');
+            var overlay = document.getElementById('overlay');
+            if (!fileInput.value) {
+                overlay.style.display = 'block';
+                setTimeout(function() {
+                    overlay.style.display = 'none';
+                }, 2000); // Hide overlay after 2 seconds
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
+    </script>
+</body>
+</html>
