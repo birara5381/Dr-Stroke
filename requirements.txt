@@ -93,7 +93,7 @@ networkx==3.3
 nltk==3.6.5
 notebook==6.4.10
 notebook-shim==0.1.0
-numpy==1.24.4
+numpy==1.24.4  # This version is compatible with Python 3.11
 oauthlib==3.2.2
 opencv-python==4.9.0.80
 opencv-python-headless==4.10.0.82
@@ -121,7 +121,7 @@ pyparsing==3.0.7
 pyrsistent==0.18.1
 python-dateutil==2.8.2
 pytz==2022.1
-pywin32==303
+pywin32==303; sys_platform == "win32"
 pywinpty==2.0.5
 pyzmq==22.3.0
 qtconsole==5.2.2
